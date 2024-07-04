@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="icons/buscar.png" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+  />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>TP CAC FRONT</title>
+  </head>
+  <body>
+    <body>
+      <!-- INICIO HEADER con BOOTSTRAP -->
+      <header class="sticky-top">
+        <nav class="navbar navbar-dark navbar-expand-md justify-content-evenly">
+          <div class="container-fluid d-flex align-items-center justify-content-sm-between">
+            <a href="./index.html">
+              <img
+                src="./images/branding/logo_light_horizontal.svg"
+                alt="Isologotipo de la marca Funkoshop"
+                width="auto"
+                height="25"
+                class="d-inline-block mobile-logo"
+              />
+            </a>
+            <button
+              class="navbar-toggler align-items-center "
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"> </span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-end"
+              id="navbarSupportedContent"
+            >
+              <div class="d-flex row align-items-center">
+                <ul class="navbar-nav me-2 align-items-center">
+                  <li class="nav-item custom-navtext">
+                    <a class="nav-link" aria-current="page" href="./index.html"
+                      >HOME</a
+                    >
+                  </li>
+                  <li class="nav-item custom-navtext contact-navlink">
+                    <a class="nav-link" href="./pages/contact.html">CONTACTO</a>
+                  </li>
+                  <li class="nav-item custom-navtext ">
+                    <a class="nav-link" href="./pages/shop.html">SHOP</a>
+                  </li>
+                  <li class="nav-item custom-navtext login-navlink">
+                    <a class="nav-link" href="./pages/login.html">LOGIN</a>
+                  </li>
+                  <li class="nav-item custom-navtext">
+                    <a class="nav-link" href="./pages/about.html">FAQ's</a>
+                  </li>
+                  <li class="nav-item custom-navtext dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src="./images/icons/person-circle-outline.svg"
+                        alt="user icon"
+                        id="user-icon"
+                      />
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="./pages/login.html"
+                          >LOGIN</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="./pages/register.html"
+                          >REGISTER</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href=""
+                          >SHOP CART</a
+                        >
+                      </li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li>
+                        <a class="dropdown-item" href="#"> FUNKO COLLECTION </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item custom-navtext cart-icon">
+                    <a class="nav-link" href=".pages/cart.html">
+                      <img
+                        src="./images/icons/cart-icon.svg"
+                        alt="icono de carrito"
+                        width="auto"
+                        height="16"
+                        class="d-inline-block align-text-top"
+                      />
+                    </a>
+                  </li>
+                </ul>
+                <!-- <form class="nav-item custom-navtext d-flex" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button> -->
+              </form>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <!-- FIN HEADER -->
+      <main>
+        <!--INICIO BANNER -->
+        <section id="banner">
+          <article id="wrap-banner">
+            <div class="banner-text">
+              <h3 class="banner-principal-text">Nuevos Ingresos</h3>
+              <p class="banner-text-description">
+                Descubrí el próximo Funko Pop de tu colección
+              </p>
+              <button class="btn-banner-text" type="button" id="btn-banner">
+                <a class="btn-banner-text" href="./pages/shop.html">Shop</a>
+              </button>
+            </div>
+          </article>
+        </section>
+        <!--FIN BANNER -->
+  
+        <!-- SECCION PRINCIPAL DE LA WEB -->
+        <main>
+          <section class="main-section">
+            <article class="text-main-section">
+              <h3 class="tittle-main-item">Star Wars </h3>
+              <p class="description-main-item">
+                Disfruta de una saga que sigue agregando personajes a su
+                colección.
+              </p>
+              <div class="line-section"></div>
+              <a class="see-collection" href="">VER COLECCIÓN</a>
+            </article>
+  
+            <picture class="img-main">
+              <img
+                src="./images/star-wars/baby-yoda-1.webp"
+                alt="Figura coleccionable Funko de Grogu de la serie The Mandalorian"
+              />
+            </picture>
+          </section>
+          <section class="main-section middle-section">
+            <article class="text-main-section">
+              <h3 class="tittle-main-item">POKEMON INDIGO</h3>
+              <p class="description-main-item">
+                Atrapa todos los que puedas y disfruta de una colección llena de
+                amigos.
+              </p>
+              <div class="line-section"></div>
+              <a class="see-collection" href="./pages/shop.html">VER COLECCIÓN</a>
+            </article>
+  
+            <picture class="img-main">
+              <img
+                src="./images/pokemon/vulpix-1.webp"
+                alt="Figura coleccionable Funko de Vulpix de la serie Pokemon"
+              />
+            </picture>
+          </section>
+          <section class="main-section">
+            <article class="text-main-section">
+              <h3 class="tittle-main-item">HARRY POTTER</h3>
+              <p class="description-main-item">
+                Revive los recuerdos de una saga llena de magia y encanto.
+              </p>
+              <div class="line-section"></div>
+              <a class="see-collection" href="./pages/shop.html">VER COLECCIÓN</a>
+            </article>
+            <picture class="img-main">
+              <img
+                src="./images/harry-potter/snape-patronus-1.webp"
+                alt="Figura coleccionable Funko del Patronus de Snape en la pelicula de Harry Potter"
+              />
+            </picture>
+          </section>
+        </main>
+        <!-- FIN DE LA SECCION PRINCIPAL DE LA WEB  -->
+  
+        <!-- INICIO LANZAMIENTOS -->
+        <section class="new-releases container-fluid">
+          <h2 class="releases-tittle">Últimos lanzamientos</h2>
+          <ul class="d-flex row container-fluid justify-content-evenly releases-articles">
+            <li class="col-4 ">
+              <article class="">
+                <a
+                  href="./pages/item.html"
+                  class="d-flex container-fluid row justify-content-center releases-items text-releases"
+                >
+                  <picture class="col-12 img-releases">
+                    <img
+                      src="./images/star-wars/trooper-1.webp"
+                      alt="Figura coleccionable Funko de un  Stormtrooper"
+                    />
+                  </picture>
+                  <div class="col-12 tittle-releases">
+                    <p class="text-collection">STAR WARS</p>
+                    <h4 class="name-item">STORMTROOPER LIGHTSABER</h4>
+                    <p>$ 1799,99</p>
+                    <p class="ctas-item">3 CUOTAS SIN INTERÉS</p>
+                  </div>
+                </a>
+              </article>
+            </li>
+            <li class="col-4">
+              <article>
+                <a
+                  href="./pages/item.html"
+                  class="d-flex container-fluid row justify-content-center text-releases"
+                >
+                  <picture class="col-12">
+                    <img
+                      src="./images/pokemon/pidgeotto-1.webp"
+                      alt="Figura coleccionable Funko de Pidgeotto"
+                    />
+                  </picture>
+                  <div class="col-12">
+                    <p class="text-collection">POKEMON</p>
+                    <h4 class="name-item">PIDGEOTTO</h4>
+                    <p>$ 1799,99</p>
+                    <p class="ctas-item">3 CUOTAS SIN INTERÉS</p>
+                  </div>
+                </a>
+              </article>
+            </li>
+            <li class="col-4">
+              <article>
+                <a
+                  href="./pages/item.html"
+                  class="d-flex container-fluid row justify-content-center text-releases"
+                >
+                  <picture class="col-12">
+                    <img
+                      src="./images/harry-potter/luna-1.webp"
+                      alt="Figura coleccionable Funko de Luna Lovegood"
+                    />
+                  </picture>
+                  <div class="col-12">
+                    <p class="text-collection">HARRY POTTER</p>
+                    <h4 class="name-item">LUNA LOVEGOOD LION MASK</h4>
+                    <p>$ 1799,99</p>
+                    <p class="ctas-item">3 CUOTAS SIN INTERÉS</p>
+                  </div>
+                </a>
+              </article>
+            </li>
+          </ul>
+
+
+          <!-- ------ NUEVOS LANZAMIENTOS PARA MOBILE WEB SITE-------------------- -->
+
+          <ul class="releases-articles-sm container-fluid">
+            <li class="d-flex container-fluid">
+              <article class="col-12">
+                <a
+                  href="./pages/item.html"
+                  class="d-flex container-fluid column justify-content-center releases-items text-releases"
+                >
+                  <picture class="col-5 img-releases">
+                    <img
+                      src="./images/star-wars/trooper-1.webp"
+                      alt="Figura coleccionable Funko de un  Stormtrooper"
+                    />
+                  </picture>
+                  <div class="col-7 tittle-releases">
+                    <p class="text-collection">STAR WARS</p>
+                    <h4 class="name-item">STORMTROOPER LIGHTSABER</h4>
+                    <p class="price-item">$ 1799,99</p>
+                    <p class="ctas-item">3 CUOTAS SIN INTERÉS</p>
+                  </div>
+                </a>
+              </article>
+            </li>
+          </ul>
+        </section>
+        <!--FIN LANZAMIENTOS -->
+      </main>
+      <!--INICIO FOOTER -->
+      <footer class="custom-footer">
+        <div class="custom-footer">
+          <section class="navbar container-fluid mb-0">
+            <nav class="d-flex row align-items-center container-fluid">
+              <ul class="mb-0 col-8 custom-text-footer">
+                <li class="nav-item custom-navtext">
+                  <a class="nav-link footer-link" href="">SHOP</a>
+                </li>
+                <li class="nav-item custom-navtext">
+                  <a class="nav-link footer-link" href="">REGISTRARSE</a>
+                </li>
+                <li class="nav-item custom-navtext">
+                  <a class="nav-link footer-link" href="">LOGIN</a>
+                </li>
+                <li class="nav-item custom-navtext">
+                  <a class="nav-link footer-link" href="">CONTACTO</a>
+                </li>
+              </ul>
+              <picture class="d-inline-block col-3 align-items-end">
+                <img
+                  src="./images/branding/isotype.svg"
+                  alt="Isotipo de la marca Funkoshop"
+                  width="auto"
+                  height="85"
+                  class="d-inline-block"
+                />
+              </picture>
+            </nav>
+          </section>
+          <p class="container-fluid row justify-content-center copyright-text">
+            All rights reserved 2023 - Funkoshop & copyright
+          </p>
+        </div>
+      </footer>
+      <!--FIN FOOTER -->
+
+
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+      ></script>
+    <!-- <script src="scripts/scripts.js"></script> -->
+    <!-- 
+        
+        INTEGRANTES:
+        - Sheila Barreto
+        - Juan Soto
+        - Juan Weffer
+        - Oscar Weffer
+
+
+     -->
+  </body>
+</html>

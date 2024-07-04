@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../icons/buscar.png" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/stylesForm.css" />
+    <title>TP CAC FRONT</title>
+  </head>
+  <body>
+      <!-- INICIO HEADER con BOOTSTRAP -->
+      <header class="sticky-top">
+        <nav class="navbar navbar-dark navbar-expand-md">
+          <div class="container-fluid d-flex align-items-center">
+            <a href="../../index.html">
+              <img
+                src="../images/branding/logo_light_horizontal.svg"
+                alt="Isologotipo de la marca Funkoshop"
+                width="auto"
+                height="25"
+                class="d-inline-block"
+              />
+            </a>
+            <button
+              class="navbar-toggler align-items-center"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"> </span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-end"
+              id="navbarSupportedContent"
+            >
+              <div class="d-flex row align-items-center">
+                <ul class="navbar-nav me-2 align-items-center">
+                  <li class="nav-item custom-navtext">
+                    <a class="nav-link" aria-current="page" href="../../index.html"
+                      >HOME</a
+                    >
+                  </li>
+                  <li class="nav-item custom-navtext">
+                    <a class="nav-link" href="./contact.html">CONTACTO</a>
+                  </li>
+                  <li class="nav-item custom-navtext">
+                    <a class="nav-link" href="./shop.html">SHOP</a>
+                  </li>
+                  <li class="nav-item custom-navtext">
+                    <a class="nav-link" href="./login.html">LOGIN</a>
+                  </li>
+                  <li class="nav-item custom-navtext">
+                    <a class="nav-link" href="./about.html">FAQ's</a> 
+                  </li>
+                  <li class="nav-item custom-navtext dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src="../images/icons/person-circle-outline.svg"
+                        alt="user icon"
+                        id="user-icon"
+                      />
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="./login.html"
+                          >LOGIN</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="./register.html"
+                          >REGISTER</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href=""
+                          >SHOP CART</a
+                        >
+                      </li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li>
+                        <a class="dropdown-item" href="#"> FUNKO COLLECTION </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item custom-navtext">
+                    <a class="nav-link" href="./cart.html">
+                      <img
+                        src="../images/icons/cart-icon.svg"
+                        alt="icono de carrito"
+                        width="auto"
+                        height="16"
+                        class="d-inline-block align-text-top"
+                      />
+                    </a>
+                  </li>
+                </ul>
+                <!-- <form class="nav-item custom-navtext d-flex" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button> -->
+              </form>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+    <div class="contenedor_contacto">
+      <h1>Ponete en contacto y comprá ¡HOY MISMO!</h1>
+    </div>
+    <main>
+      <div class="contacto_informacion_empresa">
+        <h4>FUNKOS (Buenos Aires)</h4>
+
+          <ul>
+            <li>Celular: (000) 000 - 000000</li>
+            <br>
+            <li>Mail: elmejormaildelmundo@mail.com</li>
+            <br>
+            <li>Dirección: Calle Wallaby 42, Sydney</li>
+            <br>
+          </ul>
+        <h4> FUNKOS (Interior del país)</h4>
+
+          <ul>
+            <li>Celular: (000) 000 - 0000</li>
+            <br>
+            <li>Mail: bestemailintheworld@mail.com </li>
+            <br>
+            <li>Dirección: Avenida Siempreviva 742, Springfield</li>
+            <br>
+          </ul> 
+      </div> 
+
+      <!-- Form -->
+      <div class="contenedor_formulario_contacto">
+        <h1>Completa el formulario para hacer tu pedido de Funkos:  </h1>
+        <br>
+          <form>
+              <fieldset>
+                <div class="fila1">
+                    <label>Apellido: </label>
+                    <input name="apellido" type="text" size="50"
+                    placeholder="Escriba aquí su apellido"/>
+                </div>
+                <br>
+                <div class="fila2">
+                    <label>Nombre: </label>
+                    <input name="nombre" type="text" size="50"
+                    placeholder="Escriba aquí su nombre" />
+                </div>
+                <br>
+                <div class="fila3">
+                    <label>Celular: </label>
+                    <input name="celular" type="text" size="50" 
+                    placeholder="Escriba aquí su número de celular"/>
+                </div>
+                <br>
+                <div class="fila4">
+                  <label>Dirección: </label>
+                  <input name="dirección" type="text" size="50" 
+                  placeholder="Escriba aquí su dirección"/>
+              </div>
+                <br>
+                <label for="">¿Desde qué país hizo la compra?: </label>
+                <select name="opcion" id="">
+                  <option value="Arg">Argentina</option>
+                  <option value="Br">Brasil</option>
+                  <option value="Col">Colombia</option>
+                  <option value="Chi">Chile</option>
+                  <option value="Otro">Otro</option>
+                </select>
+                <br>
+                <br>
+                <label for="">Elegir fecha de envío: </label>
+                <input type="date">
+                <br>
+                <br>
+                <input type="checkbox"> Acepto términos y condiciones.
+                <br>
+                <input type="button" class="see-collection" value= "Enviar">
+              </fieldset>   
+          </form>
+      </div> 
+          <div class="mapa">
+            <h2>¿Dónde estamos?</h2>
+            <br>
+          </div>
+          <div class="justify-content-center align-items-center d-flex">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192339.19917002192!2d-71.50472575912546!3d-41.12797677974389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x961a7b1520c860e5%3A0x8210ae97cb7b9a65!2sSan%20Carlos%20de%20Bariloche%2C%20R%C3%ADo%20Negro!5e0!3m2!1ses!2sar!4v1714690101178!5m2!1ses!2sar" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+    </main>
+    <footer class="custom-footer">
+      <div class="custom-footer">
+        <section class="navbar container-fluid mb-0">
+          <nav class="d-flex row align-items-center container-fluid">
+            <ul class="mb-0 col-8 custom-text-footer">
+              <li class="nav-item custom-navtext">
+                <a class="nav-link" href="./shop.html">SHOP</a>
+              </li>
+              <li class="nav-item custom-navtext">
+                <a class="nav-link" href=./register.html"
+                  >REGISTRARSE</a
+                >
+              </li>
+              <li class="nav-item custom-navtext">
+                <a class="nav-link" href="./login.html">LOGIN</a>
+              </li>
+              <li class="nav-item custom-navtext">
+                <a class="nav-link" href="./contacto.html">CONTACTO</a>
+              </li>
+            </ul>
+            <picture class="d-inline-block col-3 align-items-end">
+              <img
+                src="../images/branding/isotype.svg"
+                alt="Isotipo de la marca Funkoshop"
+                width="auto"
+                height="85"
+                class="d-inline-block"
+              />
+            </picture>
+          </nav>
+        </section>
+        <p class="container-fluid row justify-content-center">
+          All rights reserved 2023 - Funkoshop & copyright
+        </p>
+      </div>
+    </footer>
+    <!--FIN FOOTER -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+      ></script>
+</body>
+</html>

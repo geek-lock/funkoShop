@@ -62,6 +62,12 @@ html {
     border: none;
     height: 100%;
 }
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
 
 a {
     text-decoration: none;
@@ -593,4 +599,130 @@ li+a+.nav-item {
 #min,
 #max {
     font-size: var(--font-xsmall);
+}
+.btnlogout{
+        background-color: var(--dark-bg-solid);
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: flex; 
+        font-size: 16px;
+        margin: 4px auto;
+        cursor: pointer;
+        border-radius: 4px;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    
+    .btnlogout:hover {
+        background-color: var(--dark-solid);
+    }
+
+.titleLogin{
+    justify-content: center; 
+    text-align: center; 
+    font-size: 5rem; 
+}
+.hidden{
+    display: none !important;
+}
+/*Register Form*/
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center !important;
+    padding: 0.8rem 0 ;
+    font-size: 1.5rem;
+    form  {
+        background: #fff;
+        
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
+    }
+    
+   
+    label {
+        display: flex;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="number"], 
+    input[type="password"]{
+        
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    
+    button {
+        background-color: var(--dark-bg-solid);
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        /* display: inline-block; */
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    
+    
+    button:hover {
+        background-color: var(--dark-solid);
+    }
+    
+    
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    
+    li {
+        background: #fff;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    
+    li .actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    
+    li button {
+        background-color: #007bff;
+    }
+    
+    
+    li button:hover {
+        background-color: #0056b3;
+    }
+    
+    
+    li .delete {
+        background-color: #dc3545;
+    }
+    
 }

@@ -18,7 +18,7 @@
     <header class="sticky-top">
       <nav class="navbar navbar-expand-md">
         <div class="container-fluid d-flex align-items-center">
-          <a href="../../index.html">
+          <a href="../index.html">
             <img
               src="../images/branding/logo_light_horizontal.svg"
               alt="Isologotipo de la marca Funkoshop"
@@ -45,21 +45,22 @@
             <div class="d-flex row align-items-center">
               <ul class="navbar-nav me-2 align-items-center">
                 <li class="nav-item custom-navtext">
-                  <a class="nav-link" aria-current="page" href="./index.html"
+                  <a class="nav-link" aria-current="page" href="../index.html"
                     >HOME</a
                   >
                 </li>
                 <li class="nav-item custom-navtext">
-                  <a class="nav-link" href="../pages/contacto.html">CONTACT</a>
+                  <a class="nav-link" href="./contact.html">CONTACT</a>
+                </li>
+                
+                <li class="nav-item custom-navtext">
+                  <a class="nav-link" href="./shop.html">SHOP</a>
                 </li>
                 <li class="nav-item custom-navtext">
-                  <a class="nav-link" href="../pages/contacto.html">CONTACTO</a>
+                  <a class="nav-link" href="./login.html">LOGIN</a>
                 </li>
                 <li class="nav-item custom-navtext">
-                  <a class="nav-link" href="../pages/shop.html">SHOP</a>
-                </li>
-                <li class="nav-item custom-navtext">
-                  <a class="nav-link" href="../pages/login.html">LOGIN</a>
+                  <a class="nav-link" href="./about.html">FAQ´s</a>
                 </li>
 
                 <li class="nav-item custom-navtext dropdown">
@@ -118,23 +119,24 @@
     <!-- FIN HEADER -->
 
     <!-- SECCION PRINCIPAL DE LA WEB -->
-    <main>
-      <h1>INGRESAR A MI CUENTA</h1>
-      <div>
+    <main style="padding-bottom: 6rem; padding-top: 6rem; flex: 1;" >
+      <h1 class="titleLogin" id="titlelog">INGRESAR A MI CUENTA</h1>
+      <form id="loginForm" class=" registerForm" enctype="multipart/form-data">
         <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="johndoe@correo.com" />
-      </div>
-      <div>
+        <input type="email" id="email" placeholder="Funkoshop@correo.com" />
+           
         <label for="password">Contraseña:</label>
         <input type="password" id="password" placeholder="*********" />
-      </div>
-      <div>
+           
         <button type="submit">Ingresar</button>
+
         <input type="checkbox" id="checkbox" />
         <label for="checkbox">Recordarme</label>
-      </div>
-      <a href="//">Olvidé mi contraseña</a>
-    </main>
+      </form>
+      <div id="loggedInUserDisplay" class="hidden titleLogin"></div>
+      <button id="logoutBtn" class="hidden btnlogout">Cerrar Sesión</button>
+      
+      </main>
     <!-- FIN DE LA SECCION PRINCIPAL DE LA WEB  -->
 
     <!--INICIO FOOTER -->
@@ -180,5 +182,6 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <script src="../script.js"></script>
   </body>
 </html>

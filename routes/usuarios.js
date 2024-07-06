@@ -3,16 +3,17 @@ const router = express.Router();
 
 const userController = require('../controller/userController');
 
-
+// Rutas para usuarios
 router.get('/', userController.ObtenerTodosLosUsuarios);
 router.get('/:id', userController.ObtenerUsuarioPorId);
 
-//SOLO SE PUEDEN CREAR USUARIOS CON MULTER //ES MAS COMPLICADO editar las imagenes
-router.post('/',userController.upload.single('archivo'),userController.crearUsuario);
-
+// SOLO SE PUEDEN CREAR USUARIOS CON MULTER
+router.post('/', userController.upload.single('archivo'), userController.crearUsuario);
 
 router.put('/:id', userController.ActualizarUsuario);
-router.delete('/:id',userController.BorrarUsuario);
+router.delete('/:id', userController.BorrarUsuario);
 
+// Ruta de autenticación
+router.post('/login', userController.loginUsuario);
 
 module.exports = router;

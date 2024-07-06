@@ -1,172 +1,238 @@
-document.addEventListener('DOMContentLoaded', () =>
-{
+document.addEventListener('DOMContentLoaded', () => {
     const mostrarCrearUsuarioFormBtn = document.getElementById('mostrarCrearUsuarioFormBtn');
     const crearUsuarioForm = document.getElementById('crearUsuarioForm');
     const editarUsuarioForm = document.getElementById('editarUsuarioForm');
     const listarUsuariosBtn = document.getElementById('listarUsuariosBtn');
     const listaUsuarios = document.getElementById('listaUsuarios');
+    const loginForm = document.getElementById('loginForm');
+    const loggedInUserDisplay = document.getElementById('loggedInUserDisplay');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const titlelog = document.getElementById('titlelog');
 
     //mostrar imagen de multer
-const currentImage = document.getElementById('currentImage');
+    const currentImage = document.getElementById('currentImage');
 
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    mostrarCrearUsuarioFormBtn.addEventListener('click',() =>
-    { 
-        crearUsuarioForm.classList.toggle('hidden');
-    });
+        const formData = new FormData(loginForm);
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-
-    //CREAR USUARIOS NUEVOS
-    crearUsuarioForm.addEventListener('submit', async (e) => 
-    {
-        e.preventDefault();//evita qaue la pagina se actualice
-
-        const formData = new FormData(crearUsuarioForm);
-        passw = formData.get('Pass');
-        confpassw = formData.get('ConfPass');
-        if (passw === confpassw){
-        const data = 
-        {
-            nombre: formData.get('nombre'),
-            apellido: formData.get('apellido'),
-            mail: formData.get('mail'),
-            user_pass: passw
-            
-        }; 
-        
-        const response = await fetch('/usuarios',
-        {
+        const response = await fetch('/usuarios/login', {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
         });
 
         const result = await response.json();
-        alert(result.message);
-        crearUsuarioForm.reset();
-        crearUsuarioForm.classList.add('hidden');
-    }else{
-        alert('Las contraseñas no coinciden, favor verificar.');
-        document.getElementById('Pass').value = '';
-        document.getElementById('ConfPass').value = '';
-        
-    }
-        
+        if (result.success) {
+            alert('Login exitoso');
+            localStorage.setItem('loggedEmail', email);
+            loginForm.reset();
+            loginForm.classList.add('hidden');
+            titlelog.classList.add('hidden');
+            loggedInUserDisplay.textContent = `Usuario logeado: ${email}`;
+            loggedInUserDisplay.classList.remove('hidden');
+            logoutBtn.classList.remove('hidden');
+            startLogoutTimer();
+            window.location.href = './login.html';
+        } else {
+            alert('Credenciales incorrectas, por favor intenta nuevamente');
+        }
     });
 
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('loggedEmail');
+        loginForm.classList.remove('hidden');
+        loggedInUserDisplay.textContent = '';
+        loggedInUserDisplay.classList.add('hidden');
+        logoutBtn.classList.add('hidden');
+        titlelog.classList.remove('hidden');
+    });
 
-    //EDITAR USUARIO
-    editarUsuarioForm.addEventListener('submit', async(e) => 
-    {   
+    // Mostrar datos del usuario logeado al cargar la página
+    const loggedEmail = localStorage.getItem('loggedEmail');
+    if (loggedEmail) {
+        loggedInUserDisplay.textContent = `Usuario logeado: ${loggedEmail}`;
+        loggedInUserDisplay.classList.remove('hidden');
+        logoutBtn.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        titlelog.classList.add('hidden');
+        startLogoutTimer();
+    }
+
+    // Cerrar sesión automáticamente después de 2 minutos de inactividad
+    let timeout;
+
+    function resetTimeout() {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            localStorage.removeItem('loggedEmail');
+            loginForm.classList.remove('hidden');
+            loggedInUserDisplay.textContent = '';
+            loggedInUserDisplay.classList.add('hidden');
+            logoutBtn.classList.add('hidden');
+            alert('Sesión cerrada automáticamente por inactividad');
+        }, 120000); // 2 minutos en milisegundos
+    }
+
+    // Detectar actividad del usuario para reiniciar el temporizador
+    document.addEventListener('mousemove', resetTimeout);
+    document.addEventListener('keypress', resetTimeout);
+
+    // CREAR USUARIOS NUEVOS
+    crearUsuarioForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(crearUsuarioForm);
+        const passw = formData.get('Pass');
+        const confpassw = formData.get('ConfPass');
+
+        if (passw === confpassw) {
+            const data = {
+                nombre: formData.get('nombre'),
+                apellido: formData.get('apellido'),
+                mail: formData.get('mail'),
+                user_pass: passw
+            };
+
+            const response = await fetch('/usuarios', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            alert(result.message);
+            crearUsuarioForm.reset();
+            crearUsuarioForm.classList.add('hidden');
+        } else {
+            alert('Las contraseñas no coinciden, favor verificar.');
+            document.getElementById('Pass').value = '';
+            document.getElementById('ConfPass').value = '';
+        }
+    });
+
+    // EDITAR USUARIO
+    editarUsuarioForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(editarUsuarioForm);
-
         const id = formData.get('editID');
-        
-        const data = 
-        {
+        const data = {
             nombre: formData.get('editNombre'),
             apellido: formData.get('editApellido'),
             mail: formData.get('editMail')
         };
 
-        const response = await fetch(`/usuarios/${id}`,
-        {
+        const response = await fetch(`/usuarios/${id}`, {
             method: 'PUT',
-            headers: 
-            {
-                'Content-Type':'application/json'
+            headers: {
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        })
+        });
 
         const result = await response.json();
         alert(result.message);
         editarUsuarioForm.reset();
         editarUsuarioForm.classList.add('hidden');
         listarUsuarios();
-
     });
 
-
-
-
-
-    //listar todos los usuarios
+    // LISTAR TODOS LOS USUARIOS
     listarUsuariosBtn.addEventListener('click', listarUsuarios);
 
-    async function listarUsuarios()
-    {
+    async function listarUsuarios() {
         const response = await fetch('/usuarios');
         const usuarios = await response.json();
 
         listaUsuarios.innerHTML = '';
 
-        usuarios.forEach(usuario => 
-            {
-                const li = document.createElement('li');
+        usuarios.forEach(usuario => {
+            const li = document.createElement('li');
 
-                const imageSrc = usuario.ruta_archivo ? `/uploads/${usuario.ruta_archivo}` :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUBbNf8tPjjMylsbREVGlN1Dj30k5_JVDZOg&s';
+            const imageSrc = usuario.ruta_archivo ? `/uploads/${usuario.ruta_archivo}` : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUBbNf8tPjjMylsbREVGlN1Dj30k5_JVDZOg&s';
 
-
-                li.innerHTML = `
-                    <span> ID: ${usuario.id}, Nombre: ${usuario.nombre}, Apellido: ${usuario.apellido}, Email: ${usuario.mail}  </span>
-                    <img src="${imageSrc}" alt="Img de perfil" width="20px">
-                    
-                    <div class="actions"> 
-                        <button class="update" data-id= "${usuario.id}" data-nombre="${usuario.nombre}" data-apellido="${usuario.apellido}" data-mail="${usuario.mail}" data-image="${imageSrc}"> Actualizar </button>
-                    
-                        <button class="delete" data-id="${usuario.id}"> Eliminar </button>
-                    </div>
+            li.innerHTML = `
+                <span> ID: ${usuario.id}, Nombre: ${usuario.nombre}, Apellido: ${usuario.apellido}, Email: ${usuario.mail}  </span>
+                <img src="${imageSrc}" alt="Img de perfil" width="20px">
                 
-                `;
-                listaUsuarios.appendChild(li);
+                <div class="actions"> 
+                    <button class="update" data-id="${usuario.id}" data-nombre="${usuario.nombre}" data-apellido="${usuario.apellido}" data-mail="${usuario.mail}" data-image="${imageSrc}"> Actualizar </button>
+                
+                    <button class="delete" data-id="${usuario.id}"> Eliminar </button>
+                </div>
+            
+            `;
+            listaUsuarios.appendChild(li);
+        });
+
+        // ACTUALIZAR USUARIO
+        document.querySelectorAll('.update').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = e.target.getAttribute('data-id');
+                const nombre = e.target.getAttribute('data-nombre');
+                const apellido = e.target.getAttribute('data-apellido');
+                const mail = e.target.getAttribute('data-mail');
+
+                document.getElementById('editID').value = id;
+                document.getElementById('editNombre').value = nombre;
+                document.getElementById('editApellido').value = apellido;
+                document.getElementById('editMail').value = mail;
+
+                editarUsuarioForm.classList.remove('hidden');
             });
+        });
 
-            //ACTUALIZAR USUARIO
-            document.querySelectorAll('.update').forEach(button => 
-                {
-                    button.addEventListener('click', (e) => 
-                    {
-                        const id = e.target.getAttribute('data-id');
-                        const nombre = e.target.getAttribute('data-nombre');
-                        const apellido = e.target.getAttribute('data-apellido');
-                        const mail = e.target.getAttribute('data-mail');
-                        //const imagen = e.target.getAttribute('data-image');
-
-
-                        document.getElementById('editID').value = id;
-                        document.getElementById('editNombre').value = nombre;
-                        document.getElementById('editApellido').value = apellido;
-                        document.getElementById('editMail').value = mail;
-                       // currentImage.src = imagen;
-
-
-
-                        editarUsuarioForm.classList.remove('hidden');
-                    });
+        // ELIMINAR USUARIO
+        document.querySelectorAll('.delete').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                const id = e.target.getAttribute('data-id');
+                const response = await fetch(`/usuarios/${id}`, {
+                    method: 'DELETE'
                 });
 
-
-                document.querySelectorAll('.delete').forEach(button =>
-                    {
-                        button.addEventListener('click', async (e) =>
-                        {
-                            const id = e.target.getAttribute('data-id');
-                            const response = await fetch(`/usuarios/${id}`,
-                            {
-                                method: 'DELETE'
-                            });
-
-                            const result = await response.json();
-                            alert(result.message);
-                            listarUsuarios();
-
-                        });
-
-                    });
-
-
+                const result = await response.json();
+                alert(result.message);
+                listarUsuarios();
+            });
+        });
     }
 
+    // Función para mostrar datos del usuario logeado
+    function showLoggedInUser(email) {
+        loggedInUserDisplay.textContent = `Usuario logeado: ${email}`;
+        loggedInUserDisplay.classList.remove('hidden');
+        logoutBtn.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        titlelog.classList.add('hidden');
+        startLogoutTimer();
+    }
 
+    // Función para iniciar el temporizador de cierre de sesión
+    function startLogoutTimer() {
+        let timeout;
+
+        function resetTimeout() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                localStorage.removeItem('loggedEmail');
+                loginForm.classList.remove('hidden');
+                loggedInUserDisplay.textContent = '';
+                loggedInUserDisplay.classList.add('hidden');
+                logoutBtn.classList.add('hidden');
+                alert('Sesión cerrada automáticamente por inactividad');
+            }, 120000); // 2 minutos en milisegundos
+        }
+
+        document.addEventListener('mousemove', resetTimeout);
+        document.addEventListener('keypress', resetTimeout);
+
+        resetTimeout();
+    }
+
+    // Llamar a la función para listar usuarios al cargar la página
+    listarUsuarios();
 });

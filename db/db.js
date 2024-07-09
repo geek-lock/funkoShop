@@ -2,10 +2,10 @@ const mySql = require('mysql2');
 
 const connection = mySql.createConnection(
     {
-        host : 'localhost',
-        user: 'root',
+        host : 'smy.h.filess.io',
+        user: 'funkoShop_agerulelet',
         password : 'admin2023..',
-        database: 'FUNKOSHOP'
+        database: '2e0dae929593f951f324a0e4779c8498e0743c35'
     });
 
 

@@ -7,11 +7,74 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const loggedInUserDisplay = document.getElementById('loggedInUserDisplay');
     const logoutBtn = document.getElementById('logoutBtn');
+    const updateBtn = document.getElementById('updateUser');
+    const deleteBtn = document.getElementById('deleteUser');
     const titlelog = document.getElementById('titlelog');
+    const registerbtn = document.getElementById('registerbtn');
+    var idLogin = 0;
+    crearUsuarioForm.addEventListener('submit', async (e) => {
+       
+        const formData = new FormData(crearUsuarioForm);
+        const passw = formData.get('Pass');
+        const confpassw = formData.get('ConfPass');
 
+        if (passw === confpassw) {
+            const data = {
+                nombre: formData.get('nombre'),
+                apellido: formData.get('apellido'),
+                mail: formData.get('mail'),
+                user_pass: passw
+            };
+        
+            const response = await fetch('/usuarios', {
+                method: 'POST',
+                body: data
+            });
+
+            const result = await response.json();
+            alert(result.message);
+            crearUsuarioForm.reset();
+            crearUsuarioForm.classList.add('hidden');
+        } else {
+            alert('Las contraseñas no coinciden, favor verificar.');
+            document.getElementById('Pass').value = '';
+            document.getElementById('ConfPass').value = '';
+        }
+    });
     //mostrar imagen de multer
     const currentImage = document.getElementById('currentImage');
+    updateBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        editarUsuarioForm.classList.remove('hidden');
 
+
+    });
+    cancelUpdate.addEventListener('click', async (e) => {
+        e.preventDefault();
+        editarUsuarioForm.classList.add('hidden');
+
+
+    });
+    deleteBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        // ELIMINAR USUARIO
+        const idLogin = localStorage.getItem('idUser') ;
+                const response = await fetch(`/usuarios/${idLogin}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+                alert(result.message);
+                localStorage.removeItem('loggedEmail');
+        loginForm.classList.remove('hidden');
+        loggedInUserDisplay.textContent = '';
+        loggedInUserDisplay.classList.add('hidden');
+        logoutBtn.classList.add('hidden');
+        deleteBtn.classList.add('hidden');
+        updateBtn.classList.add('hidden');
+        titlelog.classList.remove('hidden');
+            
+    });
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -29,14 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const result = await response.json();
         if (result.success) {
-            alert('Login exitoso');
+            
+            localStorage.setItem('idUser', result.idUser);
             localStorage.setItem('loggedEmail', email);
             loginForm.reset();
             loginForm.classList.add('hidden');
             titlelog.classList.add('hidden');
             loggedInUserDisplay.textContent = `Usuario logeado: ${email}`;
             loggedInUserDisplay.classList.remove('hidden');
-            logoutBtn.classList.remove('hidden');
+           
             startLogoutTimer();
             window.location.href = './login.html';
         } else {
@@ -50,6 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loggedInUserDisplay.textContent = '';
         loggedInUserDisplay.classList.add('hidden');
         logoutBtn.classList.add('hidden');
+        deleteBtn.classList.add('hidden');
+        updateBtn.classList.add('hidden');
         titlelog.classList.remove('hidden');
     });
 
@@ -59,8 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
         loggedInUserDisplay.textContent = `Usuario logeado: ${loggedEmail}`;
         loggedInUserDisplay.classList.remove('hidden');
         logoutBtn.classList.remove('hidden');
+        deleteBtn.classList.remove('hidden');
+        updateBtn.classList.remove('hidden');
         loginForm.classList.add('hidden');
         titlelog.classList.add('hidden');
+
         startLogoutTimer();
     }
 
@@ -84,36 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keypress', resetTimeout);
 
     // CREAR USUARIOS NUEVOS
-    crearUsuarioForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(crearUsuarioForm);
-        const passw = formData.get('Pass');
-        const confpassw = formData.get('ConfPass');
-
-        if (passw === confpassw) {
-            const data = {
-                nombre: formData.get('nombre'),
-                apellido: formData.get('apellido'),
-                mail: formData.get('mail'),
-                user_pass: passw
-            };
-
-            const response = await fetch('/usuarios', {
-                method: 'POST',
-                body: formData
-            });
-
-            const result = await response.json();
-            alert(result.message);
-            crearUsuarioForm.reset();
-            crearUsuarioForm.classList.add('hidden');
-        } else {
-            alert('Las contraseñas no coinciden, favor verificar.');
-            document.getElementById('Pass').value = '';
-            document.getElementById('ConfPass').value = '';
-        }
-    });
+    console.log('esto es el form, ', crearUsuarioForm);
+    
 
     // EDITAR USUARIO
     editarUsuarioForm.addEventListener('submit', async (e) => {
@@ -186,19 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // ELIMINAR USUARIO
-        document.querySelectorAll('.delete').forEach(button => {
-            button.addEventListener('click', async (e) => {
-                const id = e.target.getAttribute('data-id');
-                const response = await fetch(`/usuarios/${id}`, {
-                    method: 'DELETE'
-                });
-
-                const result = await response.json();
-                alert(result.message);
-                listarUsuarios();
-            });
-        });
+        
     }
 
     // Función para mostrar datos del usuario logeado

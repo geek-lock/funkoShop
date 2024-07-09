@@ -51,20 +51,15 @@ const crearUsuario = (req, res) => {
     const { nombre, apellido, mail, Pass } = req.body;
     const archivo = req.file ? req.file.filename : null;
 
-    // Hash the password before saving it to the database
-    bcrypt.hash(Pass, 10, (err, hashedPassword) => {
-        if (err) throw err;
-
         const sql = 'INSERT INTO users (USER_NAME, USER_LASTNAME, mail, user_pass) VALUES (?,?,?,?)';
-        db.query(sql, [nombre, apellido, mail, hashedPassword], (err, result) => {
+        db.query(sql, [nombre, apellido, mail, Pass], (err, result) => {
             if (err) throw err;
 
             res.json({
-                message: 'Usuario Creado',
-                idUsuario: result.insertId
+                message: 'Usuario Creado'
             });
         });
-    });
+    
 };
 
 const ActualizarUsuario = (req, res) => {
@@ -93,7 +88,7 @@ const BorrarUsuario = (req, res) => {
         if (err) throw err;
 
         res.json({
-            message: 'Usuario eliminado'
+            message: `Usuario eliminado: ${id}`
         });
     });
 };
@@ -103,7 +98,7 @@ const loginUsuario = (req, res) => {
     const { email, password } = req.body;
    // console.log('estos son los datos, ',email,password);
 
-    const sql = 'SELECT mail, user_pass FROM users WHERE mail = ?';
+    const sql = 'SELECT mail, user_pass,user_id FROM users WHERE mail = ?';
     
     db.query(sql, [email], (err, result) => {
         if (err) throw err;
@@ -114,30 +109,15 @@ const loginUsuario = (req, res) => {
         }
 
         const user = result[0];
+        const id = user.user_id;
+        console.log('este es el id, desde el back, ',id);
       //  console.log('esto es el user , ',user);
         if(password === user.user_pass){
-            res.json({ success: true, message: 'Inicio de sesión exitoso' });
+            res.json({ success: true, message: 'Inicio de sesión exitoso', idUser: id});
         }else{
             return res.status(401).json({ message: 'Correo o contraseña incorrectos' });
         }
-        // Compare the provided password with the hashed password in the database
-       /* bcrypt.compare(password, user.user_pass, (err, isMatch) => {
-            console.log('aca estoy comparando, ',password, user.user_pass);
-            if (err) throw err;
-
-            if (!isMatch) {
-                console.log('dentro del if de not match, ');
-                return res.status(401).json({ message: 'Correo o contraseña incorrectos' });
-            }
-
-            // Generate a JWT token
-            //const token = jwt.sign({ user_id: user.user_id, email: user.mail }, 'your_jwt_secret', { expiresIn: '1h' });
-
-
-                res.json({ success: true, message: 'Inicio de sesión exitoso' });
-               // token: token
-           
-        });*/
+       
     });
 };
 

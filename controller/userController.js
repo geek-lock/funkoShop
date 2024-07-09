@@ -49,14 +49,12 @@ const ObtenerUsuarioPorId = (req, res) => {
 
 const crearUsuario = (req, res) => {
     const { nombre, apellido, mail, Pass } = req.body;
-    const archivo = req.file ? req.file.filename : null;
-
-        const sql = 'INSERT INTO users (USER_NAME, USER_LASTNAME, mail, user_pass) VALUES (?,?,?,?)';
+    const sql = 'INSERT INTO users (USER_NAME, USER_LASTNAME, mail, user_pass) VALUES (?,?,?,?)';
         db.query(sql, [nombre, apellido, mail, Pass], (err, result) => {
             if (err) throw err;
 
             res.json({
-                message: 'Usuario Creado'
+                message: `Usuario Creado`
             });
         });
     
@@ -64,21 +62,16 @@ const crearUsuario = (req, res) => {
 
 const ActualizarUsuario = (req, res) => {
     const { id } = req.params;
-    const { nombre, apellido, mail, Pass } = req.body;
-
-    // Hash the password before updating it in the database
-    bcrypt.hash(Pass, 10, (err, hashedPassword) => {
-        if (err) throw err;
-
-        const sql = 'UPDATE users SET USER_NAME = ?, USER_LASTNAME = ?, mail = ?, user_pass = ? WHERE user_id = ?';
-        db.query(sql, [nombre, apellido, mail, hashedPassword, id], (err, result) => {
+    const { nombre, apellido, mail, pass } = req.body;
+    const sql = 'UPDATE users SET USER_NAME = ?, USER_LASTNAME = ?, mail = ?, user_pass = ? WHERE user_id = ?';
+        db.query(sql, [nombre, apellido, mail, pass, id], (err, result) => {
             if (err) throw err;
 
             res.json({
                 message: 'Usuario editado'
             });
         });
-    });
+    
 };
 
 const BorrarUsuario = (req, res) => {

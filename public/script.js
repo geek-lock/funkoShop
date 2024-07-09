@@ -12,69 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const titlelog = document.getElementById('titlelog');
     const registerbtn = document.getElementById('registerbtn');
     var idLogin = 0;
-    crearUsuarioForm.addEventListener('submit', async (e) => {
-       
-        const formData = new FormData(crearUsuarioForm);
-        const passw = formData.get('Pass');
-        const confpassw = formData.get('ConfPass');
-
-        if (passw === confpassw) {
-            const data = {
-                nombre: formData.get('nombre'),
-                apellido: formData.get('apellido'),
-                mail: formData.get('mail'),
-                user_pass: passw
-            };
-        
-            const response = await fetch('/usuarios', {
-                method: 'POST',
-                body: data
-            });
-
-            const result = await response.json();
-            alert(result.message);
-            crearUsuarioForm.reset();
-            crearUsuarioForm.classList.add('hidden');
-        } else {
-            alert('Las contraseñas no coinciden, favor verificar.');
-            document.getElementById('Pass').value = '';
-            document.getElementById('ConfPass').value = '';
-        }
-    });
-    //mostrar imagen de multer
-    const currentImage = document.getElementById('currentImage');
-    updateBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        editarUsuarioForm.classList.remove('hidden');
-
-
-    });
-    cancelUpdate.addEventListener('click', async (e) => {
-        e.preventDefault();
-        editarUsuarioForm.classList.add('hidden');
-
-
-    });
-    deleteBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        // ELIMINAR USUARIO
-        const idLogin = localStorage.getItem('idUser') ;
-                const response = await fetch(`/usuarios/${idLogin}`, {
-                    method: 'DELETE'
-                });
-
-                const result = await response.json();
-                alert(result.message);
-                localStorage.removeItem('loggedEmail');
-        loginForm.classList.remove('hidden');
-        loggedInUserDisplay.textContent = '';
-        loggedInUserDisplay.classList.add('hidden');
-        logoutBtn.classList.add('hidden');
-        deleteBtn.classList.add('hidden');
-        updateBtn.classList.add('hidden');
-        titlelog.classList.remove('hidden');
-            
-    });
+    
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -109,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     logoutBtn.addEventListener('click', () => {
-        localStorage.removeItem('loggedEmail');
+        
+        localStorage.clear();
         loginForm.classList.remove('hidden');
         loggedInUserDisplay.textContent = '';
         loggedInUserDisplay.classList.add('hidden');
@@ -118,7 +57,37 @@ document.addEventListener('DOMContentLoaded', () => {
         updateBtn.classList.add('hidden');
         titlelog.classList.remove('hidden');
     });
+    updateBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        editarUsuarioForm.classList.remove('hidden');
 
+
+    });
+    cancelUpdate.addEventListener('click', async (e) => {
+        e.preventDefault();
+        editarUsuarioForm.classList.add('hidden');
+
+
+    });
+    deleteBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        loginForm.classList.remove('hidden');
+        loggedInUserDisplay.textContent = '';
+        loggedInUserDisplay.classList.add('hidden');
+        logoutBtn.classList.add('hidden');
+        deleteBtn.classList.add('hidden');
+        updateBtn.classList.add('hidden');
+        titlelog.classList.remove('hidden');
+        const response = await fetch(`/usuarios/${localStorage.getItem('idUser')}`, {
+            method: 'DELETE'
+            }
+        );
+        localStorage.clear();
+        alert('El user ha sido eliminado');
+
+    });
+    
     // Mostrar datos del usuario logeado al cargar la página
     const loggedEmail = localStorage.getItem('loggedEmail');
     if (loggedEmail) {
@@ -139,11 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetTimeout() {
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            localStorage.removeItem('loggedEmail');
+            localStorage.clear();
             loginForm.classList.remove('hidden');
             loggedInUserDisplay.textContent = '';
             loggedInUserDisplay.classList.add('hidden');
             logoutBtn.classList.add('hidden');
+            deleteBtn.classList.add('hidden');
+            updateBtn.classList.add('hidden');
             alert('Sesión cerrada automáticamente por inactividad');
         }, 120000); // 2 minutos en milisegundos
     }
@@ -152,19 +123,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', resetTimeout);
     document.addEventListener('keypress', resetTimeout);
 
-    // CREAR USUARIOS NUEVOS
-    console.log('esto es el form, ', crearUsuarioForm);
     
-
     // EDITAR USUARIO
     editarUsuarioForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(editarUsuarioForm);
-        const id = formData.get('editID');
+        const id = localStorage.getItem('idUser');
         const data = {
             nombre: formData.get('editNombre'),
             apellido: formData.get('editApellido'),
-            mail: formData.get('editMail')
+            mail: formData.get('editMail'),
+            pass: formData.get('editPass')
         };
 
         const response = await fetch(`/usuarios/${id}`, {
@@ -176,14 +145,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const result = await response.json();
+        localStorage.setItem('loggedEmail', data.mail);
+        loggedInUserDisplay.textContent = `Usuario logeado: ${loggedEmail}`;
+        window.location.href = './login.html';
         alert(result.message);
         editarUsuarioForm.reset();
         editarUsuarioForm.classList.add('hidden');
-        listarUsuarios();
+        
     });
 
     // LISTAR TODOS LOS USUARIOS
-    listarUsuariosBtn.addEventListener('click', listarUsuarios);
+  /*  listarUsuariosBtn.addEventListener('click', listarUsuarios);
 
     async function listarUsuarios() {
         const response = await fetch('/usuarios');
@@ -228,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         
-    }
+    }*/
 
     // Función para mostrar datos del usuario logeado
     function showLoggedInUser(email) {
@@ -262,6 +234,5 @@ document.addEventListener('DOMContentLoaded', () => {
         resetTimeout();
     }
 
-    // Llamar a la función para listar usuarios al cargar la página
-    listarUsuarios();
+    
 });

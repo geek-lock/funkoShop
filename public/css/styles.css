@@ -727,8 +727,21 @@ li+a+.nav-item {
     li .delete {
         background-color: #dc3545;
     }
-    
+    label a{
+             margin-top: 15px;
+            display: flex;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--dark-bg-solid);
+            text-decoration: none;
+    }
+    label a:hover{
+       
+        color: var(--primary-solid);
+        
 }
+}
+
 #editarUsuarioForm {
     display: flex;
     flex-direction: column;

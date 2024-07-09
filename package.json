@@ -1,5 +1,5 @@
 {
-  "name": "miprimerapaginaweb",
+  "name": "FunkoShop",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Marcos Sosa",
+  "author": "Grupo 3 CAC",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
